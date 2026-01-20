@@ -2,12 +2,12 @@ plugins {
 	checkstyle
 	java
 	jacoco
-	id("org.springframework.boot") version "3.4.0"
-	id("io.spring.dependency-management") version "1.1.6"
+	id("org.springframework.boot") version libs.versions.spring.boot.get()
+	id("io.spring.dependency-management") version libs.versions.spring.dependency.management.get()
 }
 
 group = "ru.job4j.devops"
-version = "1.0.0"
+version = libs.versions.version.get()
 
 tasks.jacocoTestCoverageVerification {
     violationRules {
@@ -36,13 +36,13 @@ repositories {
 }
 
 dependencies {
-	compileOnly("org.projectlombok:lombok:1.18.36")
-	annotationProcessor("org.projectlombok:lombok:1.18.36")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-	testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
-	testImplementation("org.assertj:assertj-core:3.24.2")
+	compileOnly(libs.lombok)
+	annotationProcessor(libs.lombok)
+	implementation(libs.spring.starter.web)
+	testImplementation(libs.spring.starter.test)
+	testRuntimeOnly(libs.junit.launcher)
+	testImplementation(libs.junit.jupiter)
+	testImplementation(libs.assertj)
 }
 
 tasks.withType<Test> {
