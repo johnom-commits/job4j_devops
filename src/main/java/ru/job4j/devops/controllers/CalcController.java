@@ -19,7 +19,8 @@ public class CalcController {
     /**
      * Конструктор класса
      */
-    public CalcController() {}
+    public CalcController() {
+    }
 
     /**
      * Пост метод для вычисления суммы двух чисел
