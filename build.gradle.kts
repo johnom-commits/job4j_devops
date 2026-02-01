@@ -1,9 +1,12 @@
+import com.github.spotbugs.snom.SpotBugsTask
+
 plugins {
 	checkstyle
 	java
 	jacoco
 	id("org.springframework.boot") version libs.versions.spring.boot.get()
 	id("io.spring.dependency-management") version libs.versions.spring.dependency.management.get()
+    alias(libs.plugins.spotbugs)
 }
 
 group = "ru.job4j.devops"
@@ -35,6 +38,15 @@ repositories {
 	mavenCentral()
 }
 
+spotbugs {
+    toolVersion.set(libs.versions.spotbugs.tool.get())
+    ignoreFailures.set(false)
+
+    dependencies {
+        spotbugsPlugins(libs.findsecbugs.plugin)
+    }
+}
+
 dependencies {
 	compileOnly(libs.lombok)
 	annotationProcessor(libs.lombok)
@@ -43,10 +55,19 @@ dependencies {
 	testRuntimeOnly(libs.junit.launcher)
 	testImplementation(libs.junit.jupiter)
 	testImplementation(libs.assertj)
+    compileOnly(libs.spotbugs.annotations)
+}
+
+tasks.withType<SpotBugsTask>().configureEach {
+    reports.create("html") {
+        required.set(true)
+        outputLocation.set(layout.buildDirectory.file("reports/spotbugs/spotbugs.html"))
+    }
 }
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+    finalizedBy(tasks.spotbugsMain)
 }
 
 tasks.register<Zip>("zipJavaDoc") {

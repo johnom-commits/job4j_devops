@@ -5,6 +5,12 @@ assertj = "3.24.2"
 junit-jupiter = "5.10.0"
 spring-dependency-management = "1.1.6"
 version = "1.0.0"
+spotbugs = "6.0.8"
+spotbugs-tool = "4.8.3"
+findsecbugs = "1.13.0"
+
+[plugins]
+spotbugs = { id = "com.github.spotbugs", version.ref = "spotbugs" }
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
@@ -13,3 +19,5 @@ spring-starter-test = { module = "org.springframework.boot:spring-boot-starter-t
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
 junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+spotbugs-annotations = { module = "com.github.spotbugs:spotbugs-annotations", version.ref = "spotbugs-tool" }
+findsecbugs-plugin = { module = "com.h3xstream.findsecbugs:findsecbugs-plugin", version.ref = "findsecbugs" }
