@@ -32,6 +32,7 @@ public class CalcApplication {
 	 * @param args - массив строк с аргументами
 	 */
 	public static void main(String[] args) {
+
 		SpringApplication.run(CalcApplication.class, args);
 	}
 }
